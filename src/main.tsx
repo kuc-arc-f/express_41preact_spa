@@ -1,8 +1,6 @@
 
 import { h, Component, render } from 'preact'
 import Router from 'preact-router';
-import Contact from './client/Contact.tsx'
-import About from './client/About.tsx'
 //
 const Header = () => (
 	<header>
@@ -15,30 +13,32 @@ const Header = () => (
 	</header>
 );
 //
-class Home extends Component {
-	setText = e => {
-		this.setState({ text: e.target.value });
-	};
-	render({ }, { text='Some Text' }) {
-		return (
-			<section class="home">
-				<input value={text} onInput={this.setText} />
-				<div>In caps: {text.toUpperCase()}</div>
-			</section>
-		);
-	}
-}
+const pages = import.meta.glob('./client/*.tsx', { eager: true })
+
+const routes = Object.keys(pages).map((path) => {
+  const name = path.match(/\.\/client\/(.*)\.tsx$/)[1]
+  return {
+    name,
+    path: name === 'Home' ? '/' : `/${name.toLowerCase()}`,
+    component: pages[path].default,
+  }
+})
+console.log(routes);
 //
 const App = () => (
-	<div class="app">
+  <div class="app">
     <Header />
-		<Router>
-			<Home path="/" />
-      <About path="/about" />
-      <Contact path="/contact" />
-		</Router>
-	</div>
+    <Router>
+    {routes.map(({ path, component: RouteComp }) => {
+      return (
+        <RouteComp key={path} path={path}  
+        ></RouteComp>
+      )
+    })}
+    </Router>
+  </div>
 );
 render(<App />, document.getElementById('app')!);
 /*
+<Component path="/about" />
 */

@@ -6,11 +6,25 @@
 
  date    : 2024/02/21
 
- update : 2024/03/16 
+ update : 2024/03/24 
 
 ***
 
 preact + express, SPA sample
+
+***
+### build
+
+```
+yarn build
+
+#dev
+yarn dev
+
+```
+
+***
+
 
 ***
 ### blog

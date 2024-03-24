@@ -1,5 +1,4 @@
 import LibConfig from './LibConfig';
-//require('dotenv').config();
 //
 const HttpCommon = {
   /**
@@ -11,16 +10,31 @@ const HttpCommon = {
   post: async function(item: any, path: string): Promise<any>
   {
     try {
-//console.log("v=", v); external_api_key
-//console.log("path=", path);
+//      const url = import.meta.env.VITE_API_URL;
+ //     const apiKey = import.meta.env.PUBLIC_API_KEY;
+//console.log("#getList.apiKey=" + apiKey);
+      item.api_key = "";
       let url = ""; 
+      if(!import.meta.env.PROD){
+        url = import.meta.env.VITE_API_URL;
+      }
+console.log("url=" + url);
       const body: any = JSON.stringify(item);		
-      const res = await fetch(path, {
+      const res = await fetch(url + path, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},      
         body: body
       });
       const json = await res.json()
+//console.log(json);   
+      if (res.status !== 200) {
+        console.error("error, status <> 200");
+        throw new Error(await res.text());
+      }
+      if (json.ret !==  LibConfig.OK_CODE) {
+        console.error("Error, json.ret <> OK");
+        return {};
+      } 
       return json;
     } catch (e) {
       console.error(e);
@@ -33,30 +47,9 @@ const HttpCommon = {
   *
   * @return
   */ 
-  serverPost: async function(item: any, path: string): Promise<any>
+  server_post: async function(item: any, path: string): Promise<any>
   {
     try {
-      item.api_key = "";
-      item.api_url = path;
-console.log(item);
-//return;
-      const body: any = JSON.stringify(item);		
-      const res = await fetch("/api/common/send_post", {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},      
-        body: body
-      });
-      const json = await res.json()
-      //console.log(json);   
-      if (res.status !== 200) {
-        console.error("error, status <> 200");
-        throw new Error(await res.text());
-      }
-      if (json.ret !==  LibConfig.OK_CODE) {
-        console.error("Error, json.ret <> OK");
-        return {};
-      } 
-      return json;
     } catch (e) {
       console.error(e);
       throw new Error('Error , post');
