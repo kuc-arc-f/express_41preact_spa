@@ -6,11 +6,11 @@
 
  date    : 2024/02/21
 
- update : 2024/03/24 
+ update : 2024/03/31 
 
 ***
 
-preact + express, SPA sample
+Preact.js SPA + express, file base routing
 
 ***
 ### build

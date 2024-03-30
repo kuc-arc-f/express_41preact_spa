@@ -6,11 +6,6 @@ export default function Page() {
     <html>
         <head>
             <title>welcome</title>
-            {(process.env.NODE_ENV === "develop") ? (
-                <link href="/static/main.css" rel="stylesheet" /> 
-            ): (
-                <link href="/public/static/main.css" rel="stylesheet" /> 
-            )} 
         </head>
         <body>
             <div id="app"></div>
@@ -23,12 +18,5 @@ export default function Page() {
     </html>
     );
 }
-/*
-<div className="container mx-auto my-2 px-8 bg-white">
-</div>
-<a href="/">[ home ]</a>
-<a href="/about">[ about ]</a>
-<a href="/test">[ test ]</a>
-<hr />
-<h1 className="text-4xl font-bold">Hello!</h1>
+/* style.css
 */
