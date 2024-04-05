@@ -6,13 +6,25 @@
 
  date    : 2024/03/25
 
- update :
+ update : 2024/03/30
 
 ***
 
 api,  sample
 
 ***
+### API : workers + D1
+
+https://github.com/kuc-arc-f/hono_34api
+
+
+***
+### .env
+
+* EXTERNAL_API_URL set
+```
+EXTERNAL_API_URL="http://localhost"
+```
 
 
 ***
