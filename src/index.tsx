@@ -1,12 +1,11 @@
 
 import express from 'express';
-import { renderToString } from 'react-dom/server';
+import renderToString from 'preact-render-to-string'
 const app = express();
 import 'dotenv/config'
 //
-import Top from './pages/App';
+import { App } from './pages/App';
 //
-import commonRouter from './routes/commonRouter';
 //
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -15,12 +14,16 @@ console.log("env=", process.env.NODE_ENV)
 //console.log("EXTERNAL_API_URL=", process.env.EXTERNAL_API_URL)
 //
 const errorObj = {ret: "NG", messase: "Error"};
-// route
-app.use('/api/common', commonRouter);
+// route 
+//app.use('/api/common', commonRouter);
 
 //routes
 app.get('/*', (req: any, res: any) => {
-  try { res.send(renderToString(Top())); } catch (error) { res.sendStatus(500); }
+  try { 
+    const html = renderToString(<App />);
+//console.log(html);
+    res.status(200).set({ 'Content-Type': 'text/html' }).send(html)
+  } catch (error) { res.sendStatus(500); }
 });
 
 //start

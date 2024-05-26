@@ -1,4 +1,5 @@
 import { defineConfig } from 'vite'
+import { createRequire } from 'module'
 import preact from '@preact/preset-vite'
 //
 export default defineConfig(({ mode }) => {
@@ -24,7 +25,14 @@ export default defineConfig(({ mode }) => {
     }
   } else {
     return {
-      plugins: [preact()]
+      plugins: [
+        preact({
+          babel: {
+            // Change cwd to load Preact Babel plugins
+            cwd: createRequire(import.meta.url).resolve('@preact/preset-vite')
+          }
+        })
+      ]
     }
   }
 })
