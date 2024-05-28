@@ -1,0 +1,31 @@
+{
+  "type": "module",
+  "scripts": {
+    "dev": "NODE_ENV=develop nodemon",
+    "dev:test": "NODE_ENV=develop npx nodemon ./dist/index.js",
+    "build": "npm run clean && npm run build:server && npx vite build --mode client",
+    "build:test": "vite build && vite build --mode client",
+    "build:server": "vite build --ssr src/index.tsx --outDir dist",
+    "clean": "rimraf dist && rimraf public/static",
+    "watch": "npx vite build --mode client --watch",
+    "test": "ts-node src/index.ts"
+  },
+  "dependencies": {
+    "cookie-parser": "^1.4.6",
+    "dotenv": "^16.4.4",
+    "esm": "^3.2.25",
+    "express": "^4.18.2",
+    "preact": "^10.20.2",
+    "preact-render-to-string": "^6.4.2",
+    "preact-router": "^4.1.2"
+  },
+  "devDependencies": {
+    "@preact/preset-vite": "^2.8.2",
+    "@types/express": "^4.17.17",
+    "@types/node": "^18.14.6",
+    "nodemon": "^3.0.3",
+    "rimraf": "^3.0.2",
+    "typescript": "^5.4.5",
+    "vite": "^5.2.10"
+  }
+}
