@@ -24,6 +24,17 @@ yarn dev
 ```
 
 ***
+### Sample
+
+* api_test: api sample
+
+* basic_auth: basic auth, express-basic-auth use
+
+* simple_auth: simple auth, user data from .env
+
+* tailwindcss: css sample
+
+* turso_test: Turso, LibSQL sample
 
 
 ***
