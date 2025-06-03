@@ -1,13 +1,10 @@
 
 import express from 'express';
-import { renderToString } from 'react-dom/server';
 const app = express();
 import 'dotenv/config'
-//
-import Top from './pages/App';
-//
-import commonRouter from './routes/commonRouter';
-//
+
+import App from './pages/App';
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
@@ -15,16 +12,18 @@ console.log("env=", process.env.NODE_ENV)
 //console.log("EXTERNAL_API_URL=", process.env.EXTERNAL_API_URL)
 //
 const errorObj = {ret: "NG", messase: "Error"};
-// route
-app.use('/api/common', commonRouter);
+//app.use('/api/common', commonRouter);
 
 //routes
 app.get('/*', (req: any, res: any) => {
-  try { res.send(renderToString(Top())); } catch (error) { res.sendStatus(500); }
+  try { 
+    const html = App({coolieAuth: "" });
+    res.status(200).set({ 'Content-Type': 'text/html' }).send(html)
+  } catch (error) { res.sendStatus(500); }
 });
 
 //start
-const PORT = 4000;
+const PORT = 3000;
 app.listen({ port: PORT }, () => {
   console.log(`Server ready at http://localhost:${PORT}`);
 });
