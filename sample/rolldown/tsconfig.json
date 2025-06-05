@@ -9,7 +9,8 @@
     "removeComments": true,
     "esModuleInterop": true,
     "moduleResolution": "node",
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "jsxImportSource": "preact"
   },
   "include": ["src/**/*.ts", "src/**/*.js", "src/**/*.tsx"],
   "references": [{ "path": "./tsconfig.node.json" }],

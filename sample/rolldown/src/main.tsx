@@ -1,7 +1,7 @@
 
 import { h, Component, render } from 'preact'
 import Router from 'preact-router';
-import './index.css'
+//import './index.css'
 //
 const Header = () => (
 	<header>
