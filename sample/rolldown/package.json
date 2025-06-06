@@ -3,7 +3,7 @@
   "scripts": {
     "dev": "nodemon",
     "build": "npm run build:server && npx vite build --mode client && npm run build:css",
-    "build:server": "npx rolldown -c rolldown.config.js",
+    "build:server": "vite build --ssr src/index.tsx --outDir dist",
     "build:css": "npx @tailwindcss/cli -i ./src/main.css -o ./public/static/main.css",
     "build:prod": "NODE_ENV=production npm run build",
     "clean": "rimraf dist && rimraf public/static",
@@ -12,10 +12,9 @@
   "dependencies": {
     "cookie-parser": "^1.4.6",
     "dotenv": "^16.4.4",
-    "esm": "^3.2.25",
     "express": "^4.18.2",
     "preact": "^10.26.6",
-    "preact-render-to-string": "^6.4.2",
+    "preact-render-to-string": "^6.5.13",
     "preact-router": "^4.1.2"
   },
   "devDependencies": {

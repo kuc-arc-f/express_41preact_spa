@@ -1,9 +1,11 @@
 
 import express from 'express';
+import { h } from 'preact';
+import { render } from 'preact-render-to-string';
 const app = express();
 import 'dotenv/config'
 
-import App from './pages/App';
+import { App } from './pages/App';
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -14,10 +16,11 @@ console.log("env=", process.env.NODE_ENV)
 const errorObj = {ret: "NG", messase: "Error"};
 //app.use('/api/common', commonRouter);
 
-//routes
+//SPA
 app.get('/*', (req: any, res: any) => {
   try { 
-    const html = App({coolieAuth: "" });
+    const html = render(<App />);
+    //console.log(html);
     res.status(200).set({ 'Content-Type': 'text/html' }).send(html)
   } catch (error) { res.sendStatus(500); }
 });
